@@ -1,0 +1,307 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Avenue Merveilles ✨ Le royaume du jeu à Agadir</title>
+  <meta name="description" content="Avenue Merveilles — Aire de jeux, ateliers créatifs et anniversaires à Agadir.">
+  <style>
+    :root{
+      --bg1:#ffdff0;
+      --bg2:#dfe9ff;
+      --accent:#ff6f61;
+      --accent2:#ffd166;
+      --muted:#6b6b6b;
+      --card:rgba(255,255,255,0.93);
+    }
+    *{box-sizing:border-box}
+    html,body{height:100%}
+    body{
+      margin:0;
+      font-family:Inter, system-ui, -apple-system, 'Segoe UI', Roboto, Arial;
+      color:#222;
+      background:linear-gradient(180deg,var(--bg1),var(--bg2));
+      min-height:100vh;
+      overflow-x:hidden;
+      position:relative;
+      -webkit-font-smoothing:antialiased;
+      -moz-osx-font-smoothing:grayscale;
+    }
+    /* Starfield */
+    #starfield{position:fixed;left:0;top:0;width:100%;height:100%;pointer-events:none;z-index:0;mix-blend-mode:screen;}
+    .star{position:absolute;background:radial-gradient(circle,var(--star,#fff),transparent);border-radius:50%;opacity:0.9;box-shadow:0 0 6px rgba(255,255,255,0.6)}
+
+    .container{max-width:1100px;margin:0 auto;padding:20px;position:relative;z-index:3}
+    header{display:flex;align-items:center;gap:16px;padding:14px 0;position:relative;z-index:4}
+    .brand{display:flex;align-items:center;gap:12px}
+    .logo{width:72px;height:72px;border-radius:14px;display:flex;align-items:center;justify-content:center;color:white;font-weight:900;font-size:28px;background:linear-gradient(135deg,#ff6f61,#ffd166,#6ad3d1,#9b6dff,#ff9ad1);background-size:400% 400%;animation:rainbow 6s linear infinite;box-shadow:0 12px 30px rgba(255,111,97,0.12)}
+    @keyframes rainbow{0%{background-position:0% 50%}50%{background-position:100% 50%}100%{background-position:0% 50%}}
+    .titles .site-title{font-weight:900;font-size:18px}
+    .titles .site-sub{font-size:12px;color:var(--muted)}
+    nav{margin-left:auto;display:flex;gap:12px}
+    nav a{text-decoration:none;color:var(--muted);font-weight:800;padding:8px 10px;border-radius:8px}
+    nav a:hover{background:rgba(255,255,255,0.6);color:var(--accent)}
+
+    .hero{display:grid;grid-template-columns:1fr 420px;gap:20px;align-items:center;padding:8px 0}
+    .kicker{display:inline-block;background:linear-gradient(90deg,var(--accent),var(--accent2));color:white;padding:6px 12px;border-radius:999px;font-weight:900}
+    h1{font-size:34px;margin:12px 0 8px;background:linear-gradient(90deg,#ff6f61,#ffd166,#6ad3d1,#ff9ad1);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-size:400% 100%;animation:shine 5s linear infinite}
+    @keyframes shine{0%{background-position:0 0}100%{background-position:400% 0}}
+    p.lead{margin:0 0 14px;font-size:16px;color:#333;line-height:1.4}
+    .cta{background:linear-gradient(90deg,#ff6f61,#ffd166,#6ad3d1);padding:12px 18px;border-radius:12px;color:white;font-weight:900;text-decoration:none;box-shadow:0 6px 20px rgba(255,111,97,0.16)}
+    .secondary{background:#fff;border:2px solid #fff0ed;padding:12px 18px;border-radius:12px;color:var(--accent);font-weight:900;text-decoration:none}
+
+    .video-card{background:var(--card);padding:10px;border-radius:14px;box-shadow:0 10px 30px rgba(0,0,0,.06);overflow:hidden}
+    .video-card iframe{width:100%;height:320px;border-radius:10px;border:0;display:block}
+
+    section{padding:26px 0;position:relative;z-index:2}
+    h2{font-size:22px;margin:0 0 12px}
+    .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:16px}
+    .card{background:var(--card);padding:12px;border-radius:12px;box-shadow:0 8px 22px rgba(0,0,0,.06);overflow:hidden;display:flex;flex-direction:column}
+    .card img{width:100%;height:170px;object-fit:cover;border-radius:8px}
+    .pill{display:inline-block;padding:6px 10px;background:var(--accent2);border-radius:999px;font-weight:800;margin-bottom:8px}
+
+    .pricing{display:flex;gap:12px;flex-wrap:wrap;margin-top:12px}
+    .price{padding:12px;border-radius:12px;background:rgba(255,255,255,0.96);box-shadow:0 8px 22px rgba(0,0,0,.06);flex:1;min-width:200px;text-align:left}
+    .price h3{margin-top:0}
+
+    .info-card{background:var(--card);padding:12px;border-radius:12px;box-shadow:0 8px 22px rgba(0,0,0,.06)}
+
+    footer{padding:18px 0;border-top:1px solid rgba(255,255,255,0.5);color:#666;text-align:center;position:relative;z-index:3;margin-top:30px}
+
+    /* Confetti */
+    #confettiLayer{position:fixed;left:0;top:0;width:100%;height:100%;pointer-events:none;z-index:1;overflow:hidden}
+    .confetti{position:absolute;will-change:transform,opacity;border-radius:3px;mix-blend-mode:normal;box-shadow:0 6px 12px rgba(0,0,0,0.08)}
+
+    .schedule-img{display:block;margin:0 auto;max-width:800px;width:100%;border-radius:16px;box-shadow:0 10px 30px rgba(0,0,0,0.1)}
+
+    @media(max-width:960px){
+      .hero{grid-template-columns:1fr}
+      .video-card iframe{height:220px}
+    }
+  </style>
+</head>
+<body>
+  <div id="starfield" aria-hidden="true"></div>
+  <div id="confettiLayer" aria-hidden="true"></div>
+
+  <div class="container">
+    <header>
+      <div class="brand">
+        <div class="logo" aria-hidden="true">🌈</div>
+        <div class="titles">
+          <div class="site-title">Avenue Merveilles</div>
+          <div class="site-sub">Agadir — Haut Founty</div>
+        </div>
+      </div>
+      <nav>
+        <a href="#activites">Activités</a>
+        <a href="#emploi">Emploi du temps</a>
+        <a href="#anniversaire">Anniversaires</a>
+        <a href="#contact">Contact</a>
+      </nav>
+    </header>
+
+    <main>
+      <section class="hero" id="home">
+        <div>
+          <span class="kicker">Ambiance festive</span>
+          <h1>Le lieu où chaque sourire devient souvenir</h1>
+          <p class="lead">Avenue Merveilles — aire de jeux, ateliers créatifs et anniversaires à Agadir. Conçu pour le partage, la sécurité et la joie des enfants.</p>
+          <div style="display:flex;gap:12px;margin-top:12px">
+            <a class="cta" href="#contact">Réserver une visite</a>
+            <a class="secondary" href="#anniversaire">Voir formules anniversaires</a>
+          </div>
+        </div>
+        <aside class="video-card" aria-hidden="true">
+          <iframe src="https://www.tiktok.com/embed/v2/7456157155226307862" allowfullscreen title="Vidéo inspiration"></iframe>
+        </aside>
+      </section>
+
+      <section id="activites">
+        <h2>Activités & espaces</h2>
+        <div class="grid">
+          <article class="card">
+            <img src="https://lh3.googleusercontent.com/gps-cs-s/AG0ilSyJ52L8kU8LVVpfLdkO7bYCDd7HZ6mSQs9W0K95XGizE0uMNidWTBUa3_l0f1hCqiWBhOtT4W8Z0Pp3rMt2alNChFm4cJLgNUpIcilcuJb4md5Q7n4FOK41r5fEwNzDmlQad8EE=s312-w234-h312-n-k-no" alt="Parc couvert">
+            <div style="padding-top:10px">
+              <div class="pill">Parc couvert</div>
+              <h3>Village de jeux multisensoriel</h3>
+              <p>Parc de jeux. Village de métiers et loisirs. Là où nos petits écrivent leur histoire. Parc climatisé.</p>
+            </div>
+          </article>
+          <article class="card">
+            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQWi4FncqoZ7HF9ePm6cIMxDw3ONSb5WHsLF_P3f4OEBw&s=10" alt="Manèges">
+            <div style="padding-top:10px">
+              <div class="pill">Jeux</div>
+              <h3>Manèges & mini-simulateurs</h3>
+              <p>Manèges doux et voitures électriques pour les petits explorateurs.</p>
+            </div>
+          </article>
+          <article class="card">
+            <img src="https://lh3.googleusercontent.com/gps-cs-s/AG0ilSwNce8Zw5DefN1efGmqlMc6PUzeEQEn420Ev9WN0iJrkERW5uriPb_C9w6nCCwN8Dxxbn__LAwPw-XfBfegaJRi3oCEQ_GVDHL0pH6jitsWa6heDhxYlmJR12wXL30OMgFH-W8=w367-h367-n-k-no-nu" alt="Ateliers créatifs">
+            <div style="padding-top:10px">
+              <div class="pill">Créatif</div>
+              <h3>Ateliers & animations</h3>
+              <p>Peinture, modelage et ateliers thématiques encadrés par des animateurs.</p>
+            </div>
+          </article>
+          <article class="card">
+            <img src="https://lh3.googleusercontent.com/gps-cs-s/AG0ilSznmLl9e5bssxo4Qr_NPuD-t65XLwY8fwEwXcDfxh8c93Onqa22vTyjP6zB8L4yXfdInaYEUb7Ug7YW9aYDYT5bAasz0v_nJOXj3zZjVmXg2AyUwqVYCDUeTK7pr29a-8WA7bvrUhXEQuS9=w367-h459-n-k-no-nu" alt="Laser Game">
+            <div style="padding-top:10px">
+              <div class="pill">Aventure</div>
+              <h3>Mini Laser Game</h3>
+              <p>Arène immersive, missions simples pour les plus jeunes.</p>
+            </div>
+          </article>
+          <article class="card">
+            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQakioBp_ydmTmJvXMdvCV5cyuddbBBMtFEtQhUOLpdNr-ZGNzk77vvYvZe&s=10" alt="Anniversaires">
+            <div style="padding-top:10px">
+              <div class="pill">Fête</div>
+              <h3>Anniversaires clés en main</h3>
+              <p>Salles privées, thèmes, photo, goûter et animations — tout géré par notre équipe.</p>
+            </div>
+          </article>
+
+          <!-- Espace café ajouté -->
+          <article class="card">
+            <img src="https://lh3.googleusercontent.com/gps-cs-s/AG0ilSz0OSBnkobI_T57F33yfI_pKL279osYJREM0iac6wTCarpJqsPUMbs9TZp6RwgLVk72vdzRLpwl6W8L-fEnH_jGNPxyOfWW3XQ3EDmHrzA3oQp7UOsPD1pn4M_zvVqDuyffarU=s312-w234-h312-n-k-no" alt="Espace café et détente">
+            <div style="padding-top:10px">
+              <div class="pill">Détente</div>
+              <h3>Espace Café & Pause Gourmande</h3>
+              <p>Pour les parents : un coin café chaleureux pour se détendre pendant que les enfants jouent en toute sécurité.</p>
+            </div>
+          </article>
+        </div>
+      </section>
+
+      <section id="emploi">
+        <h2>Emploi du temps</h2>
+        <img class="schedule-img" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQar8TK0FfMOCR0Il33zv7spBJoU3CdSRRFl-yC6N1EMg&s=10" alt="Emploi du temps Avenue Merveilles">
+      </section>
+
+      
+
+
+<section id="anniversaire">
+  <h2>Formules & Tarifs Anniversaire</h2>
+  <div class="pricing" style="display:flex;flex-wrap:wrap;justify-content:center;gap:10px;">
+    <img src="https://scontent.cdninstagram.com/v/t51.82787-15/571862262_17897394075337643_5648295817832084202_n.heic?stp=dst-jpg_e35_p640x640_sh0.08_tt6&_nc_cat=108&ig_cache_key=Mzc1MjE2ODA4MDk5OTQ3MzkwNQ%3D%3D.3-ccb1-7&ccb=1-7&_nc_sid=58cdad&efg=eyJ2ZW5jb2RlX3RhZyI6InhwaWRzLjkwMHgxNjAwLnNkci5DMiJ9&_nc_ohc=Ft9s_Qc14TcQ7kNvwE3G7Oe&_nc_oc=AdmiEZe_DOw2TNTP6zf0AIv8g39hDWMwHBwL9x-NSxL51bZgLOlCOdEj-6BiU9R18TY&_nc_ad=z-m&_nc_cid=0&_nc_zt=23&_nc_ht=scontent.cdninstagram.com&_nc_gid=CfGMrqtzz_1VVAl6KdhT9Q&oh=00_...
+         alt="Tarifs anniversaire 1" style="width:48%;border-radius:14px;box-shadow:0 6px 18px rgba(0,0,0,.1);">
+    <div style="position:relative;width:48%;border-radius:14px;overflow:hidden;box-shadow:0 6px 18px rgba(0,0,0,.1);">
+      <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTK8O0iB3aqIGoIigLbiZfMKJ3tomAsZs0AORqi9ytmdA&s=10"
+           alt="Tarifs anniversaire 2" style="width:100%;display:block;">
+      <div style="position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);color:white;font-weight:900;font-size:18px;text-align:center;text-shadow:0 2px 6px rgba(0,0,0,0.6);background:rgba(0,0,0,0.3);padding:10px 14px;border-radius:10px;">
+        Pour plus d’infos :<br>Suivez-nous sur Instagram<br>@avenue.merveilles.agadir
+      </div>
+    </div>
+  </div>
+</section>
+
+
+
+
+      
+<section id="avis">
+  <h2>Avis des Parents</h2>
+  <div class="grid" style="gap:18px;">
+    <div class="card" style="text-align:center;">
+      <p style="font-size:22px;">⭐⭐⭐⭐⭐</p>
+      <p>“Un endroit magique ! Mon fils ne voulait plus partir.”</p>
+      <p><strong>— Sofia, maman d’Aymen (6 ans)</strong></p>
+    </div>
+    <div class="card" style="text-align:center;">
+      <p style="font-size:22px;">⭐⭐⭐⭐⭐</p>
+      <p>“Personnel adorable, activités variées et lieu très propre.”</p>
+      <p><strong>— Karim, papa de Lina (5 ans)</strong></p>
+    </div>
+    <div class="card" style="text-align:center;">
+      <p style="font-size:22px;">⭐⭐⭐⭐⭐</p>
+      <p>“Organisation parfaite pour l’anniversaire de notre fille !”</p>
+      <p><strong>— Nadia, maman de Rayan (7 ans)</strong></p>
+    </div>
+  </div>
+</section>
+
+<section id="contact">
+        <h2>Contact & Localisation</h2>
+        <aside class="info-card">
+          <p><strong>Instagram :</strong> <a href="https://www.instagram.com/avenue.merveilles.agadir" target="_blank">@avenue.merveilles.agadir</a></p>
+          <p><strong>Adresse :</strong> Haut Founty, Agadir</p>
+          <p><strong>Téléphone :</strong> 05282-29848</p>
+          <p><strong>Horaires :</strong> Lun–Dim 10:00–22:00</p>
+          <div style="margin-top:10px"><iframe src="https://www.google.com/maps?q=Haut+Founty+Agadir&output=embed" width="100%" height="220" style="border:0;border-radius:10px"></iframe></div>
+        </aside>
+      </section>
+    </main>
+
+    <footer>© Avenue Merveilles — Agadir - by Ibrahim Tigguint</footer>
+  </div>
+
+<script>
+/* Starfield */
+const starfield = document.getElementById('starfield');
+const STAR_COUNT = 80;
+const stars = [];
+function rand(min,max){ return Math.random()*(max-min)+min; }
+for(let i=0;i<STAR_COUNT;i++){
+  const s = document.createElement('div');
+  s.className = 'star';
+  const size = rand(1,4);
+  s.style.width = size + 'px';
+  s.style.height = size + 'px';
+  s.style.setProperty('--star', 'rgba(255,255,255,'+rand(0.4,1)+')');
+  s.dataset.speed = (rand(0.2,1.2)).toFixed(2);
+  s.style.left = (Math.random()*100) + '%';
+  s.style.top = (Math.random()*100) + '%';
+  s.style.opacity = rand(0.4,1).toFixed(2);
+  starfield.appendChild(s);
+  stars.push(s);
+}
+window.addEventListener('scroll', ()=>{
+  const scroll = window.scrollY;
+  stars.forEach(s => {
+    const speed = parseFloat(s.dataset.speed);
+    s.style.transform = 'translateY(' + (scroll * speed * 0.02) + 'px)';
+  });
+});
+
+/* Confetti */
+const confettiLayer = document.getElementById('confettiLayer');
+const COLORS = ['#ff6f61','#ffd166','#6ad3d1','#ff9ad1','#9b6dff','#fff77a','#88ff9a'];
+function createConfettiPiece(){
+  const el = document.createElement('div');
+  el.className = 'confetti';
+  const w = Math.floor(rand(6,12));
+  el.style.width = w + 'px';
+  el.style.height = Math.round(w*0.6) + 'px';
+  el.style.left = Math.random()*100 + '%';
+  el.style.top = (-rand(5,20)) + 'vh';
+  el.style.background = COLORS[Math.floor(Math.random()*COLORS.length)];
+  el.style.opacity = rand(0.7,1);
+  confettiLayer.appendChild(el);
+  animateConfetti(el);
+}
+function animateConfetti(el){
+  const x = rand(-40,40);
+  const duration = rand(4,8)*1000;
+  const rot = rand(0,360);
+  el.animate([
+    {transform:`translate(${x}px,0) rotate(${rot}deg)`,opacity:1},
+    {transform:`translate(${x*4}px,100vh) rotate(${rot+720}deg)`,opacity:0}
+  ],{duration,iterations:1,easing:'cubic-bezier(.2,.8,.2,1)'}).onfinish=()=>el.remove();
+}
+setInterval(()=>{ if(Math.random()<0.45) createConfettiPiece(); },300);
+
+/* Simple smooth scroll for anchor links */
+document.querySelectorAll('a[href^="#"]').forEach(a=>{
+  a.addEventListener('click', e=>{
+    const href = a.getAttribute('href');
+    if(href.length>1){
+      e.preventDefault();
+      const el = document.querySelector(href);
+      if(el) el.scrollIntoView({behavior:'smooth',block:'start'});
+    }
+  });
+});
+</script>
+</body>
+</html>
